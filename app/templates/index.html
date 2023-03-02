@@ -2,7 +2,16 @@
 
 {% block content %}
 
-
-
+<div class="centerDiv">
+    <h1 class="mt-50">Keep Track of Your Scores</h1>
+    
+    <form action="/" method="POST">
+        {{ form.csrf_token }}
+        {{form.num_players.label(class="form-label")}} <br>
+        {{form.num_players(class="mb-3")}} <br>
+        {{form.submit(class="btn btn-primary")}}
+    </form>
+    
+</div>
 
 {% endblock %}

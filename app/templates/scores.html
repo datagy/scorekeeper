@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="centerDiv">
+
+<h1>Keep Track of Your Scores</h1>
+
+
+<form action="/scores" method="POST">
+    {{ form.csrf_token }}
+
+    {% for field in form %}
+        {% if field.type == 'IntegerField' %}
+            {{ field.label }} <br>
+            {{ field }} <br> <br>
+        {% endif %}
+    {% endfor %}
+
+    {{form.submit(class="btn btn-primary")}} <br>
+</form>
+<br>
+<div class="row justify-content-center">
+    <div class="col-auto">
+        {% if table_values|length > 0 %}
+            <table class="table table-striped">
+                <tr>
+                {% for col in table_cols %}
+                <th scope="col">{{ col }}</th>
+                {% endfor %}
+                </tr>
+                {% for row in table_values %}
+                <tr>
+                    <td>{{ row[0] }}</td>
+                    {% for value in row[1] %}
+                        <td>{{value}}</td>            
+                    {% endfor %}
+                </tr>    
+                {% endfor %}
+            </table>
+
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}
